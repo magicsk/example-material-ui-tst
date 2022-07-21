@@ -1,0 +1,1 @@
+ALTER TABLE "public"."order_items" ADD COLUMN "orders_id" uuid NOT NULL ;

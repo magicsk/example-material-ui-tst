@@ -1,0 +1,1 @@
+ALTER TABLE "public"."customers" ADD COLUMN "last_name" text NULL ;

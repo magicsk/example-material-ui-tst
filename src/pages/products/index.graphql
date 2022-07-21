@@ -1,0 +1,126 @@
+query product($id: uuid!) {
+  product(id: $id) {
+    ...product_products
+  }
+}
+
+query products($distinct_on: [products_select_column!], $limit: Int, $offset: Int, $order_by: [products_order_by!], $where: products_bool_exp) {
+  products(
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    ...products_products
+  }
+}
+
+mutation deleteProduct($id: uuid!) {
+  deleteProduct(id: $id) {
+    ...deleteProduct_products
+  }
+}
+
+mutation deleteProducts($where: products_bool_exp!) {
+  deleteProducts(where: $where) {
+    ...deleteProducts_products_mutation_response
+  }
+}
+
+mutation insertProduct($products: products_insert_input!, $on_conflict: products_on_conflict) {
+  insertProduct(object: $products, on_conflict: $on_conflict) {
+    ...insertProduct_products
+  }
+}
+
+mutation insertProducts($products: [products_insert_input!]!, $on_conflict: products_on_conflict) {
+  insertProducts(objects: $products, on_conflict: $on_conflict) {
+    ...insertProducts_products_mutation_response
+  }
+}
+
+mutation updateProduct($_inc: products_inc_input, $products: products_set_input, $pk_columns: products_pk_columns_input!) {
+  updateProduct(_inc: $_inc, _set: $products, pk_columns: $pk_columns) {
+    ...updateProduct_products
+  }
+}
+
+mutation updateProducts($_inc: products_inc_input, $products: products_set_input, $where: products_bool_exp!) {
+  updateProducts(_inc: $_inc, _set: $products, where: $where) {
+    ...updateProducts_products_mutation_response
+  }
+}
+
+fragment product_products on products {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment products_products on products {
+  id
+  name
+  createdAt
+  updatedAt
+  price
+  quantity
+}
+
+fragment deleteProduct_products on products {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment deleteProducts_products_mutation_response on products_mutation_response {
+  returning {
+    createdAt
+    id
+    isDeleted
+    name
+    price
+    quantity
+    updatedAt
+  }
+}
+
+fragment insertProduct_products on products {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment insertProducts_products_mutation_response on products_mutation_response {
+  returning {
+    createdAt
+    id
+    isDeleted
+    name
+    price
+    quantity
+    updatedAt
+  }
+}
+
+fragment updateProduct_products on products {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+fragment updateProducts_products_mutation_response on products_mutation_response {
+  returning {
+    createdAt
+    id
+    isDeleted
+    name
+    price
+    quantity
+    updatedAt
+  }
+}

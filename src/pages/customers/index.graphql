@@ -1,0 +1,168 @@
+query customer($id: uuid!) {
+  customer(id: $id) {
+    ...customer_customers
+    orders {
+      ...customer_orders
+    }
+  }
+}
+
+query customers($distinct_on: [customers_select_column!], $limit: Int, $offset: Int, $order_by: [customers_order_by!], $where: customers_bool_exp) {
+  customers(
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    ...customers_customers
+  }
+}
+
+mutation deleteCustomer($id: uuid!) {
+  deleteCustomer(id: $id) {
+    ...deleteCustomer_customers
+  }
+}
+
+mutation deleteCustomers($where: customers_bool_exp!) {
+  deleteCustomers(where: $where) {
+    ...deleteCustomers_customers_mutation_response
+  }
+}
+
+mutation insertCustomer($customers: customers_insert_input!, $on_conflict: customers_on_conflict) {
+  insertCustomer(object: $customers, on_conflict: $on_conflict) {
+    ...insertCustomer_customers
+  }
+}
+
+mutation insertCustomers($customers: [customers_insert_input!]!, $on_conflict: customers_on_conflict) {
+  insertCustomers(objects: $customers, on_conflict: $on_conflict) {
+    ...insertCustomers_customers_mutation_response
+  }
+}
+
+mutation updateCustomer($customers: customers_set_input, $pk_columns: customers_pk_columns_input!) {
+  updateCustomer(_set: $customers, pk_columns: $pk_columns) {
+    ...updateCustomer_customers
+  }
+}
+
+mutation updateCustomers($customers: customers_set_input, $where: customers_bool_exp!) {
+  updateCustomers(_set: $customers, where: $where) {
+    ...updateCustomers_customers_mutation_response
+  }
+}
+
+fragment customer_customers on customers {
+  id
+  name
+  address
+  email
+  firstName
+  lastName
+  phone
+  createdAt
+  updatedAt
+}
+
+fragment customers_customers on customers {
+  id
+  name
+  address
+  email
+  firstName
+  lastName
+  phone
+  createdAt
+  updatedAt
+}
+
+fragment deleteCustomer_customers on customers {
+  id
+  name
+  address
+  email
+  firstName
+  lastName
+  phone
+  createdAt
+  updatedAt
+}
+
+fragment deleteCustomers_customers_mutation_response on customers_mutation_response {
+  returning {
+    address
+    createdAt
+    email
+    firstName
+    id
+    isDeleted
+    lastName
+    name
+    phone
+    updatedAt
+  }
+}
+
+fragment insertCustomer_customers on customers {
+  id
+  name
+  address
+  email
+  firstName
+  lastName
+  phone
+  createdAt
+  updatedAt
+}
+
+fragment insertCustomers_customers_mutation_response on customers_mutation_response {
+  returning {
+    address
+    createdAt
+    email
+    firstName
+    id
+    isDeleted
+    lastName
+    name
+    phone
+    updatedAt
+  }
+}
+
+fragment updateCustomer_customers on customers {
+  id
+  name
+  address
+  email
+  firstName
+  lastName
+  phone
+  createdAt
+  updatedAt
+}
+
+fragment updateCustomers_customers_mutation_response on customers_mutation_response {
+  returning {
+    address
+    createdAt
+    email
+    firstName
+    id
+    isDeleted
+    lastName
+    name
+    phone
+    updatedAt
+  }
+}
+
+fragment customer_orders on orders {
+  orderDate
+  id
+  orderStatus
+  shippedDate
+}

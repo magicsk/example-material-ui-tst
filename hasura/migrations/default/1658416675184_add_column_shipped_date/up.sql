@@ -1,0 +1,1 @@
+ALTER TABLE "public"."orders" ADD COLUMN "shipped_date" date NOT NULL ;

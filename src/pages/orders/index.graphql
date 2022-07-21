@@ -1,0 +1,139 @@
+query order($id: uuid!) {
+  order(id: $id) {
+    ...order_orders
+  }
+}
+
+query orders($distinct_on: [orders_select_column!], $limit: Int, $offset: Int, $order_by: [orders_order_by!], $where: orders_bool_exp) {
+  orders(distinct_on: $distinct_on, limit: $limit, offset: $offset, order_by: $order_by, where: $where) {
+    ...orders_orders
+  }
+}
+
+mutation deleteOrder($id: uuid!) {
+  deleteOrder(id: $id) {
+    ...deleteOrder_orders
+  }
+}
+
+mutation deleteOrders($where: orders_bool_exp!) {
+  deleteOrders(where: $where) {
+    ...deleteOrders_orders_mutation_response
+  }
+}
+
+mutation insertOrder($orders: orders_insert_input!, $on_conflict: orders_on_conflict) {
+  insertOrder(object: $orders, on_conflict: $on_conflict) {
+    ...insertOrder_orders
+  }
+}
+
+mutation insertOrders($orders: [orders_insert_input!]!, $on_conflict: orders_on_conflict) {
+  insertOrders(objects: $orders, on_conflict: $on_conflict) {
+    ...insertOrders_orders_mutation_response
+  }
+}
+
+mutation updateOrder($orders: orders_set_input, $pk_columns: orders_pk_columns_input!) {
+  updateOrder(_set: $orders, pk_columns: $pk_columns) {
+    ...updateOrder_orders
+  }
+}
+
+mutation updateOrders($orders: orders_set_input, $where: orders_bool_exp!) {
+  updateOrders(_set: $orders, where: $where) {
+    ...updateOrders_orders_mutation_response
+  }
+}
+
+fragment order_orders on orders {
+  id
+  name
+  orderStatus
+  createdAt
+  orderDate
+  shippedDate
+  updatedAt
+}
+
+fragment orders_orders on orders {
+  id
+  name
+  orderStatus
+  createdAt
+  orderDate
+  shippedDate
+  updatedAt
+}
+
+fragment deleteOrder_orders on orders {
+  id
+  name
+  orderStatus
+  createdAt
+  orderDate
+  shippedDate
+  updatedAt
+}
+
+fragment deleteOrders_orders_mutation_response on orders_mutation_response {
+  returning {
+    createdAt
+    customerId
+    id
+    isDeleted
+    name
+    orderDate
+    orderStatus
+    shippedDate
+    updatedAt
+  }
+}
+
+fragment insertOrder_orders on orders {
+  id
+  name
+  orderStatus
+  createdAt
+  orderDate
+  shippedDate
+  updatedAt
+}
+
+fragment insertOrders_orders_mutation_response on orders_mutation_response {
+  returning {
+    createdAt
+    customerId
+    id
+    isDeleted
+    name
+    orderDate
+    orderStatus
+    shippedDate
+    updatedAt
+  }
+}
+
+fragment updateOrder_orders on orders {
+  id
+  name
+  orderStatus
+  createdAt
+  orderDate
+  shippedDate
+  updatedAt
+}
+
+fragment updateOrders_orders_mutation_response on orders_mutation_response {
+  returning {
+    createdAt
+    customerId
+    id
+    isDeleted
+    name
+    orderDate
+    orderStatus
+    shippedDate
+    updatedAt
+  }
+}
